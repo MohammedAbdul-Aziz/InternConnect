@@ -108,7 +108,7 @@
         <label for="verification-code">Verification Code:</label>
         <input type="text" id="verification-code" placeholder="Enter verification code">
       </div>
-      <button class="btn">Verify</button>
+      <button class="btn" onclick="redirectToDepartment()">Verify</button>
     </div>
   </div>
 
@@ -116,6 +116,16 @@
     function showVerification() {
       document.querySelector('.login-section').style.display = 'none';
       document.getElementById('verification-section').style.display = 'block';
+    }
+
+    function redirectToDepartment() {
+      const code = document.getElementById('verification-code').value;
+      if (code.trim() !== "") {
+        // Redirect to the department selection page
+        window.location.href = "student-department-login.html";
+      } else {
+        alert("Please enter a valid verification code.");
+      }
     }
   </script>
 </body>
