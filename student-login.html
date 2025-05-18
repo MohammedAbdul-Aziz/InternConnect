@@ -4,129 +4,474 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="login.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #121212;
-      color: #e0e0e0;
+      background: linear-gradient(135deg, #e3eefe 60%, #f9f9f9 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-
-    header {
-      background-color: #1f1f1f;
-      color: #e0e0e0;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    .side-menu, .side-menu .side-title, .side-links a, .nav-title, .btn, .login-container, .form-group label, input, select, .subtitle, h1, h2 {
+      font-family: 'Poppins', Arial, sans-serif !important;
     }
-
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
     .login-container {
+      background: #fff;
       max-width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: #242424;
-      border-radius: 12px;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.8);
+      margin: 60px auto 0 auto;
+      padding: 40px 30px 32px 30px;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,102,204,0.08);
+      text-align: left;
+      transition: box-shadow 0.3s;
     }
-
+    .login-container:hover {
+      box-shadow: 0 8px 32px rgba(0,102,204,0.12);
+    }
     h2 {
-      color: #ffffff;
+      color: #004080;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      font-size: 1.5rem;
     }
-
     .form-group {
       margin-bottom: 20px;
+      position: relative;
     }
-
     label {
       display: block;
       margin-bottom: 8px;
-      color: #e0e0e0;
+      color: #333;
+      font-size: 1rem;
+      font-weight: 500;
     }
-
-    input {
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 38px;
+      width: 20px;
+      height: 20px;
+      fill: #7a869a;
+      pointer-events: none;
+    }
+    input, select {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #444444;
+      padding: 12px 12px 12px 42px;
+      border: 1px solid #d0d7e2;
       border-radius: 8px;
-      background-color: #1f1f1f;
-      color: #e0e0e0;
+      background-color: #f9f9f9;
+      color: #222;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
     }
-
-    input:focus {
+    input:focus, select:focus {
       outline: none;
-      border-color: #575757;
+      border-color: #5a8dee;
+      background: #fff;
     }
-
     .btn {
       width: 100%;
-      padding: 12px;
-      background-color: #3a3a3a;
+      padding: 14px 0;
+      background-color: #0066cc;
       color: #ffffff;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
-      transition: all 0.3s;
+      font-weight: 600;
+      font-size: 1.08rem;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(0,102,204,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-
-    .btn:hover {
-      background-color: #ffffff;
-      color: #3a3a3a;
+    .btn:hover, .btn:focus {
+      background-color: #004999;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 16px rgba(0,102,204,0.12);
+      outline: none;
     }
-
-    .verification-section {
-      display: none;
+    .btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+    .terms {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      color: #888;
+    }
+    .terms input[type="checkbox"] {
+      margin-right: 10px;
+      accent-color: #5a8dee;
+    }
+    .subtitle {
+      text-align: center;
+      color: #666;
+      font-size: 1.1rem;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-family: 'Poppins', Arial, sans-serif !important;
+    }
+    @media (max-width: 900px) {
+      .side-menu {
+        left: 0;
+        transform: translateX(-100%);
+        width: 80vw;
+        max-width: 320px;
+        min-width: 170px;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.18);
+        z-index: 2000;
+        transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+      }
+      .side-menu.open {
+        transform: translateX(0);
+      }
+      .main-content-wrapper {
+        margin-left: 0 !important;
+      }
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.18);
+        z-index: 1500;
+      }
+      .side-menu.open ~ .mobile-overlay {
+        display: block;
+      }
+    }
+    @media (max-width: 600px) {
+      .side-menu {
+        width: 90vw;
+        min-width: 0;
+        max-width: 320px;
+      }
+    }
+    footer {
+      margin-top: auto;
+      background: #f1f5fa;
+      color: #888;
+      text-align: center;
+      padding: 18px 0 10px 0;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #004080;
+      color: white;
+      padding: 10px 20px;
+      position: relative;
+      z-index: 1000;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+    .nav-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      font-family: 'Poppins', Arial, sans-serif !important;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: 16px;
+    }
+    .nav-links li {
+      position: relative;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-family: 'Poppins', Arial, sans-serif !important;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      color: #ffcc00;
+      outline: none;
+    }
+    .nav-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      font-size: 1.2rem;
+    }
+    .Button{
+      position: fixed;
+      align-items: center;
+    }
+    /* Side menu styles */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 220px;
+      background: #004080;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px 0 0 0;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+      z-index: 1100;
+      transform: translateX(-240px);
+      transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+      font-family: 'Poppins', Arial, sans-serif !important;
+    }
+    .side-menu.open {
+      transform: translateX(0);
+    }
+    .side-menu .side-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 0 0 32px 32px;
+      letter-spacing: 1px;
+      font-family: 'Poppins', Arial, sans-serif !important;
+    }
+    .side-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .side-links li {
+      width: 100%;
+    }
+    .side-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 500;
+      padding: 14px 32px;
+      width: 100%;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      border-left: 4px solid transparent;
+      font-family: 'Poppins', Arial, sans-serif !important;
+    }
+    .side-links a:hover, .side-links a.active {
+      background: #0059b3;
+      color: #ffcc00;
+      border-left: 4px solid #ffcc00;
+      transform: translateX(4px) scale(1.03);
+    }
+    .side-icon {
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+    .side-menu-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: #004080;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1200;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      transition: background 0.3s, transform 0.3s;
+      font-size: 1.5rem;
+    }
+    .side-menu-toggle:hover, .side-menu-toggle:focus {
+      background: #0059b3;
+      color: #ffcc00;
+      transform: scale(1.08);
+      outline: none;
+    }
+    @media (max-width: 900px) {
+      .side-menu {
+        left: 0;
+        transform: translateX(-100%);
+        width: 80vw;
+        max-width: 320px;
+        min-width: 170px;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.18);
+        z-index: 2000;
+        transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+      }
+      .side-menu.open {
+        transform: translateX(0);
+      }
+      .main-content-wrapper {
+        margin-left: 0 !important;
+      }
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.18);
+        z-index: 1500;
+      }
+      .side-menu.open ~ .mobile-overlay {
+        display: block;
+      }
+    }
+    @media (max-width: 600px) {
+      .side-menu {
+        width: 90vw;
+        min-width: 0;
+        max-width: 320px;
+      }
+    }
+    .button{
+      position: relative;
+      left: 180px;
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>Student Login</h1>
-  </header>
-
-  <div class="login-container">
-    <h2>Enter Your Details</h2>
-    <div class="login-section">
-      <div class="form-group">
-        <label for="email">Email ID:</label>
-        <input type="email" id="email" placeholder="Enter your email">
+<body style="background: linear-gradient(135deg, #e3eefe 60%, #f9f9f9 100%);">
+  <button class="side-menu-toggle" onclick="document.querySelector('.side-menu').classList.toggle('open'); document.querySelector('.mobile-overlay').style.display = document.querySelector('.side-menu').classList.contains('open') ? 'block' : 'none';">
+    &#9776;
+  </button>
+  <nav class="side-menu side-menu-fade">
+    <div class="side-title">InternConnect</div>
+    <ul class="side-links">
+      <li><a href="home.html"><span class="side-icon">🏠</span>Home</a></li>
+      <li><a href="Internships.html"><span class="side-icon">💼</span>Internships</a></li>
+      <li><a href="College.html"><span class="side-icon">🎓</span>Colleges</a></li>
+      <li><a href="About.html"><span class="side-icon">ℹ️</span>About</a></li>
+      <li><a href="FAQs.html"><span class="side-icon">❓</span>FAQs</a></li>
+    </ul>
+  </nav>
+  <div class="mobile-overlay" onclick="document.querySelector('.side-menu').classList.remove('open'); this.style.display='none';"></div>
+  <div class="main-content-wrapper" style="margin-left:240px; min-height:100vh; transition: margin 0.4s cubic-bezier(.77,0,.18,1);">
+    <div class="container">
+      <nav class="navbar">
+        <div class="nav-left">
+          <span class="nav-title">InternConnect</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="home.html" title="Home"><span class="nav-icon">🏠</span></a></li>
+          <li><a href="Internships.html" title="Internships"><span class="nav-icon">💼</span></a></li>
+          <li><a href="College.html" title="Colleges"><span class="nav-icon">🎓</span></a></li>
+          <li><a href="About.html" title="About"><span class="nav-icon">ℹ️</span></a></li>
+          <li><a href="FAQs.html" title="FAQs"><span class="nav-icon">❓</span></a></li>
+        </ul>
+      </nav>
+      <header style="background: linear-gradient(90deg, #004080 70%, #0066cc 100%); color: white; padding: 38px 32px 28px 32px; border-radius: 0 0 24px 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); margin: 0 32px 32px 0; position: relative; text-align:center;">
+        <h1 style="margin-bottom: 8px; font-size:2.2rem; letter-spacing:1px; font-weight:700; text-shadow:0 2px 8px rgba(0,0,0,0.08); font-family:'Poppins',Arial,sans-serif;">Student Login</h1>
+        <p class="subtitle" style="font-size:1.25rem; color:#e3eefe; margin-top:10px; font-family:'Poppins',Arial,sans-serif;">Access your dashboard and apply for internships</p>
+        <div style="position:absolute; right:32px; top:32px; opacity:0.12; font-size:6rem; pointer-events:none;">🎓</div>
+      </header>
+      <div class="container">
+        <div class="login-container">
+          <h2>Login to Your Account</h2>
+          <form>
+            <div class="form-group">
+              <label for="email">Email ID:</label>
+              <svg class="input-icon" viewBox="0 0 20 20"><path d="M2 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4zm2 0v.01L10 9l6-4.99V4H4zm0 2.236V16h12V6.236l-6 4.99-6-4.99z"/></svg>
+              <input type="email" id="email" placeholder="Enter your student email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <svg class="input-icon" viewBox="0 0 20 20"><path d="M10 2a4 4 0 0 0-4 4v3H5a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2h-1V6a4 4 0 0 0-4-4zm-2 7V6a2 2 0 1 1 4 0v3H8z"/></svg>
+              <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+              <label for="student-id">Student ID:</label>
+              <svg class="input-icon" viewBox="0 0 20 20"><path d="M10 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-3.31 0-6 1.34-6 3v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1c0-1.66-2.69-3-6-3z"/></svg>
+              <input type="text" id="student-id" placeholder="Enter your student ID" required>
+            </div>
+            <div class="form-group">
+              <label for="department">Department:</label>
+              <svg class="input-icon" style="top:36px;" viewBox="0 0 20 20"><path d="M10 2L2 7l8 5 8-5-8-5zm0 7.75L4.21 7 10 3.25 15.79 7 10 9.75zm-6 2.25v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2l-6 3.75L4 12z"/></svg>
+              <select id="department" required style="padding-left:38px;">
+                <option value="">Select your department</option>
+                <option value="computer-science">Computer Science</option>
+                <option value="physics">Physics</option>
+                <option value="mathematics">Mathematics</option>
+                <option value="chemistry">Chemistry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mobile">Mobile Number:</label>
+              <svg class="input-icon" viewBox="0 0 20 20"><path d="M6.62 10.79a15.053 15.053 0 0 0 2.59 2.59l2.2-2.2a1 1 0 0 1 1.11-.21c1.2.48 2.53.73 3.88.73a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1C5.92 18 2 14.08 2 9.5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.35.25 2.68.73 3.88a1 1 0 0 1-.21 1.11l-2.2 2.2z"/></svg>
+              <input type="tel" id="mobile" placeholder="Enter your registered mobile number" required>
+            </div>
+            <div class="terms">
+              <input type="checkbox" id="terms" required>
+              <label for="terms">I agree to the terms and conditions</label>
+            </div>
+            <div class="button">
+              <a href="home.html">Login</a>
+            </div>
+              
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter your password">
-      </div>
-      <button class="btn" onclick="showVerification()">Proceed</button>
-    </div>
-
-    <div class="verification-section" id="verification-section">
-      <h2>Verification</h2>
-      <div class="form-group">
-        <label for="verification-code">Verification Code:</label>
-        <input type="text" id="verification-code" placeholder="Enter verification code">
-      </div>
-      <button class="btn" onclick="redirectToDepartment()">Verify</button>
+      <footer>
+        &copy; 2025 InternConnect. All rights reserved.
+      </footer>
+      <script>
+        // Side menu auto-close on link click (for mobile)
+        document.querySelectorAll('.side-links a').forEach(link => {
+          link.addEventListener('click', () => {
+            document.querySelector('.side-menu').classList.remove('open');
+            document.querySelector('.mobile-overlay').style.display = 'none';
+          });
+        });
+        // Close side menu if clicking outside (mobile UX)
+        document.querySelector('.mobile-overlay').addEventListener('click', function() {
+          document.querySelector('.side-menu').classList.remove('open');
+          this.style.display = 'none';
+        });
+        // Ensure main-content-wrapper margin is 0 on mobile
+        function adjustMainContentMargin() {
+          var wrapper = document.querySelector('.main-content-wrapper');
+          if(window.innerWidth <= 900) {
+            wrapper.style.marginLeft = '0';
+          } else {
+            wrapper.style.marginLeft = '240px';
+          }
+        }
+        window.addEventListener('resize', adjustMainContentMargin);
+        window.addEventListener('DOMContentLoaded', adjustMainContentMargin);
+      </script>
     </div>
   </div>
-
-  <script>
-    function showVerification() {
-      document.querySelector('.login-section').style.display = 'none';
-      document.getElementById('verification-section').style.display = 'block';
-    }
-
-    function redirectToDepartment() {
-      const code = document.getElementById('verification-code').value;
-      if (code.trim() !== "") {
-        // Redirect to the department selection page
-        window.location.href = "student-department-login.html";
-      } else {
-        alert("Please enter a valid verification code.");
-      }
-    }
-  </script>
 </body>
 </html>
