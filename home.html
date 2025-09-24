@@ -1,0 +1,378 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InternConnect - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f9f9f9 60%, #e3eefe 100%);
+      color: #333;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: #004080;
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .nav-title {
+      font-size: 3rem;
+      font-weight: 600;
+      margin: 0;
+      position: relative;
+      left: 60px;
+      top: 5px;
+    }
+
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 10px;
+      display: flex;
+      gap: 16px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffcc00;
+    }
+    .nav-icon{
+      position: relative;
+      max-width: 100px;
+      margin: 10px;
+      display: flex;
+      font-weight: 600;
+      font-size: 1.08rem;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 2rem;
+      width: 40px;
+      text-align: center
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: #004080;
+      border-bottom: 1px solid #e3e3e3;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #ffffff;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .container {
+      position: relative;
+      left: 370px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 32px 30px 28px 30px;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      transition: box-shadow 0.3s, transform 0.3s;
+      margin-bottom: 0;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .card h2 {
+      color: #004080;
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #333;
+      font-size: 1.08rem;
+      margin-bottom: 18px;
+    }
+
+    .button {
+      background-color: #0066cc;
+      color: white;
+      padding: 14px 0;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.08rem;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(0,102,204,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .button:hover, .button:focus {
+      background-color: #004999;
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 16px rgba(0,102,204,0.12);
+      outline: none;
+    }
+
+    .button svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Side menu styles */
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 220px;
+      background: #004080;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px 0 0 0;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+      z-index: 1100;
+      transform: translateX(-240px);
+      transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+    }
+    .side-menu.open {
+      transform: translateX(0);
+    }
+    .side-menu .side-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin: 0 0 32px 32px;
+      letter-spacing: 1px;
+    }
+    .side-links {
+      position: relative;
+      bottom: 575px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .side-links li {
+      width: 100%;
+    }
+    .side-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 500;
+      padding: 14px 32px;
+      width: 100%;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      border-left: 4px solid transparent;
+    }
+    .side-links a:hover, .side-links a.active {
+      background: #0059b3;
+      color: #ffcc00;
+      border-left: 4px solid #ffcc00;
+      transform: translateX(4px) scale(1.03);
+    }
+    .side-icon {
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+    .side-menu-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      background: #004080;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1200;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      transition: background 0.3s, transform 0.3s;
+      font-size: 1.5rem;
+    }
+    .side-menu-toggle:hover, .side-menu-toggle:focus {
+      background: #0059b3;
+      color: #ffcc00;
+      transform: scale(1.08);
+      outline: none;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 900px) {
+      .side-menu {
+        width: 170px;
+        padding-top: 18px;
+      }
+      .side-menu .side-title {
+        font-size: 1.1rem;
+        margin-left: 18px;
+        margin-bottom: 18px;
+      }
+      .side-links a {
+        font-size: 0.98rem;
+        padding: 10px 18px;
+      }
+    }
+    @media (max-width: 600px) {
+      .side-menu {
+        width: 100vw;
+        padding-top: 12px;
+        box-shadow: none;
+      }
+      .side-menu .side-title {
+        margin-left: 12px;
+        margin-bottom: 12px;
+      }
+      .side-links a {
+        font-size: 1rem;
+        padding: 10px 12px;
+      }
+      .side-menu-toggle {
+        top: 10px;
+        left: 10px;
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+      }
+    }
+    .side-menu-fade {
+      animation: fadeInMenu 0.5s cubic-bezier(.77,0,.18,1);
+    }
+    @keyframes fadeInMenu {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="mnc-logo">
+          <img src="logo.png" alt="InternConnect Logo" />
+        </div>
+        <div class="nav-title"></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="home.html" title="Home">Home<span class="nav-icon">🏠</span></a></li>
+        <li><a href="Internships.html" title="Internships">Internships<span class="nav-icon">💼</span></a></li>
+        <li><a href="College.html" title="Colleges">Colleges<span class="nav-icon">🎓</span></a></li>
+        <li><a href="About.html" title="About">About<span class="nav-icon">ℹ️</span></a></li>
+        <li><a href="FAQs.html" title="FAQs">FAQs<span class="nav-icon">❓</span></a></li>
+      </ul>
+    </nav>
+    <header>
+      <h1 style="margin-bottom: 8px;">Welcome to InternConnect</h1>
+      <p class="subtitle">Your gateway to internships, learning, and growth</p>
+    </header>
+    <button class="side-menu-toggle" onclick="document.querySelector('.side-menu').classList.toggle('open');">
+      &#9776;
+    </button>
+    <nav class="side-menu side-menu-fade">
+      <div class="side-title"></div>
+      <ul class="side-links">
+        <li><a href="home.html"><span class="side-icon">🏠</span>Home</a></li>
+        <li><a href="Internships.html"><span class="side-icon">💼</span>Internships</a></li>
+        <li><a href="College.html"><span class="side-icon">🎓</span>Colleges</a></li>
+        <li><a href="About.html"><span class="side-icon">ℹ️</span>About</a></li>
+        <li><a href="FAQs.html"><span class="side-icon">❓</span>FAQs</a></li>
+      </ul>
+    </nav>
+    <div class="container" style="margin-left:240px; transition: margin 0.4s cubic-bezier(.77,0,.18,1);">
+      <div class="card">
+        <h2>My Applications</h2>
+        <p>Track your internship applications and status updates.</p>
+        <button class="button">View Applications</button>
+      </div>
+
+      <div class="card">
+        <h2>Find Internships</h2>
+        <p>Explore latest internship opportunities matched to your profile.</p>
+        <button class="button" onclick="location.href='Internships.html'">Browse Internships</button>
+      </div>
+
+      <div class="card">
+        <h2>Profile Settings</h2>
+        <p>Update your profile, resume, and preferences.</p>
+        <button class="button">Edit Profile</button>
+      </div>
+    </div>
+
+    <script>
+      // Side menu auto-close on link click (for mobile)
+      document.querySelectorAll('.side-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.querySelector('.side-menu').classList.remove('open');
+        });
+      });
+      // Close side menu if clicking outside (mobile UX)
+      document.addEventListener('click', function(e) {
+        const menu = document.querySelector('.side-menu');
+        const toggle = document.querySelector('.side-menu-toggle');
+        if (menu.classList.contains('open') && !menu.contains(e.target) && !toggle.contains(e.target)) {
+          menu.classList.remove('open');
+        }
+      });
+    </script>
+</body>
+</html>
